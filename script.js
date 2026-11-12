@@ -111,15 +111,32 @@
   fetch(video.dataset.src).then(r => r.blob()).then(b => { video.src = URL.createObjectURL(b); })
     .catch(() => { video.src = video.dataset.src; });
 
-  document.querySelectorAll('[data-look]').forEach(el => {
-    const d = el.dataset.look;
+  // Hero links: their look matches where they sit around her, which is only true on the wide layout.
+  // On phones/tablets the links stack under her, so they leave her face neutral.
+  const stacked = matchMedia('(max-width:1060px)');
+  function bind(el, d, when) {
     if (canHover) {
-      el.addEventListener('pointerenter', () => look(d));
+      el.addEventListener('pointerenter', () => { if (when()) look(d); });
       el.addEventListener('pointerleave', () => away(d));
     }
-    el.addEventListener('focusin', () => look(d));
+    el.addEventListener('focusin', () => { if (when()) look(d); });
     el.addEventListener('focusout', () => away(d));
-  });
+  }
+  document.querySelectorAll('.hero [data-look]').forEach(el => bind(el, el.dataset.look, () => !stacked.matches));
+
+  // Top bar, on every layout: the logo (top left) and the Let's talk / theme buttons (top right).
+  const topBar = [[document.querySelector('.nav .logo'), 'up-left'],
+                  [document.querySelector('.nav .pill-pink'), 'up-right'],
+                  [document.getElementById('themeToggle'), 'up-right']];
+  for (const [el, d] of topBar) {
+    if (!el) continue;
+    bind(el, d, () => true);
+    // touch has no hover: a tap plays the look, then she turns back
+    el.addEventListener('pointerdown', e => {
+      if (e.pointerType === 'mouse') return;
+      look(d); clearTimeout(el._lookT); el._lookT = setTimeout(() => away(d), 1300);
+    });
+  }
 
   // Debug / test hook
   window.__avatar = { get phase() { return phase; }, get dir() { return dir; }, get frame() { return frameNow(); }, look, away };
