@@ -171,6 +171,8 @@ h3{font-size:1.3rem;font-weight:600}
 /* nudge these three up by ~10% of her height */
 .hero .tl,.hero .tr{position:relative;top:calc(var(--stage-h,460px) * -.1)}
 .hero .tr{top:calc(var(--stage-h,460px) * -.1 - 34px);left:max(-110px,-7vw)}
+.hero .tl{top:calc(var(--stage-h,460px) * -.1 - 34px);left:min(110px,7vw)}
+.hero .ml{position:relative;top:-22px;left:min(36px,2.5vw)}
 .hero .chip.pill-pink{border-radius:18px}
 /* status card with a waving 3D hand */
 .status{display:flex;flex-direction:column;align-items:stretch;gap:10px;width:min(320px,100%);padding:14px;border-radius:26px;z-index:2;--tint:var(--lav)}
@@ -292,7 +294,7 @@ h3{font-size:1.3rem;font-weight:600}
     grid-template-areas:"head head" "stage stage" "tl ml" "bl tr" "br br"}
   .stage{width:min(360px,78vw);justify-self:center;margin-bottom:6px}
   .hero .status-anchor{justify-self:center}
-  .hero .tl,.hero .tr{top:0;left:0}
+  .hero .tl,.hero .tr,.hero .ml{top:0;left:0}
   .status-anchor{height:auto}
   .status-anchor .status{position:static}
   .hero .chip{justify-self:stretch;align-self:stretch;justify-content:center;margin:0;min-width:0;white-space:normal;padding:12px 10px;font-size:.92rem;gap:8px}
