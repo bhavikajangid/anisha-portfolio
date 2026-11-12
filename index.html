@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anisha — UGC Creator &amp; Marketer</title>
+<meta name="description" content="Anisha is a UGC creator and marketer in India. Conceptualised, scripted, filmed and edited — made for brands to publish on their own platforms.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Outfit:wght@300;400;500;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#f6f4fb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e0d18" media="(prefers-color-scheme: dark)">
+<script>
+  // Set theme before first paint: saved choice, else the system setting.
+  (function () {
+    var t = localStorage.getItem('theme');
+    if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="stylesheet" href="styles.css?v=20261112p">
+</head>
+<body>
+
+<div class="bg" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+<header class="nav" id="top">
+  <a class="logo" href="#hero">anisha<span>.</span></a>
+  <nav aria-label="Main">
+    <a href="#about">About</a>
+    <a href="#what-i-do">What I Do</a>
+    <a href="#ugc">UGC Examples</a>
+    <a href="#off-the-clock">Off the Clock</a>
+    <a class="pill pill-pink" href="#contact">Let's talk</a>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a6.8 6.8 0 0 0 10.7 10.7z"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main>
+
+<!-- 1 · HERO: headline on top; she looks at whichever link you hover -->
+<section class="screen hero" id="hero">
+  <div class="head-block copy">
+    <p class="eyebrow">✦ UGC CREATOR · MARKETER</p>
+    <h1>Videos that make people <span class="hl">stop scrolling.</span></h1>
+    <p class="lede">A creator who thinks like a marketer. I plan, script, film and edit content that sells.</p>
+  </div>
+
+  <a class="spot tl chip c-blue" data-look="up-left" href="#what-i-do"><i>🎬</i>What I do <b>↖</b></a>
+  <a class="spot ml chip c-mint" data-look="left" href="#ugc"><i>▶️</i>Proof of work <b>←</b></a>
+  <a class="spot bl chip c-pink" data-look="down-left" href="#about"><i>🙋🏽‍♀️</i>About me <b>↙</b></a>
+
+  <div class="stage" id="stage">
+    <video id="heroVideo" data-src="assets/hero-looks.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
+    <canvas id="avatar" width="420" height="540" role="img" aria-label="Animated portrait of Anisha that looks at the link you point to"></canvas>
+    <span class="spark s1">✦</span><span class="spark s2">✦</span>
+  </div>
+
+  <a class="spot tr chip c-butter" data-look="up-right" href="#off-the-clock"><b>↗</b>Off the clock <i>🎞️</i></a>
+  <div class="spot br status-anchor" data-look="up-right"><div class="status glass">
+    <div class="hi">
+      <span class="wave" aria-hidden="true">👋</span>
+      <div>
+        <strong>Hi, I'm Anisha!</strong>
+        <small><i class="dot"></i>Open for projects</small>
+      </div>
+    </div>
+    <ul class="facts">
+      <li><span>📍</span>India · Remote projects</li>
+      <li><span>🎯</span>SaaS · AI · Tech · Lifestyle</li>
+      <li><span>🎬</span>Videos · Carousels · Scripts</li>
+    </ul>
+    <a class="chip pill-pink talk" href="#contact"><i>✉</i>Let's talk <b>→</b></a>
+  </div></div>
+</section>
+
+<!-- 2 · ABOUT -->
+<section class="screen about" id="about">
+  <figure class="frame about-frame">
+    <img src="assets/about.jpg" width="600" height="720" alt="Animated portrait of Anisha in glasses and earphones, smiling and glancing to the side" loading="lazy" decoding="async">
+    <span class="spark s1">✦</span><span class="crown">♛</span>
+  </figure>
+  <div class="copy">
+    <h2>Hi, I'm <span class="ul">Anisha.</span></h2>
+    <p class="lede">The person behind the camera, the concepts and the edits.</p>
+    <p class="badge">UGC Video Producer · India</p>
+    <ul class="icon-list">
+      <li><span class="ic c-pink">💡</span>Conceptualised · Scripted · Filmed · Edited by Anisha</li>
+      <li><span class="ic c-blue">🎥</span>Video content · Carousel content</li>
+      <li><span class="ic c-mint">💚</span>Made for brands to publish on their own platforms</li>
+    </ul>
+    <p class="hand">A little creativity goes a long way ☺</p>
+  </div>
+</section>
+
+<!-- 3 · WHAT I DO -->
+<section class="screen what" id="what-i-do">
+  <div class="head">
+    <h2>What I <span class="ul">Do.</span></h2>
+    <p class="lede">A little creativity, from concept to content.</p>
+  </div>
+  <div class="cards">
+    <article class="card tint-pink">
+      <span class="num">01.</span><span class="emo">🎬</span>
+      <h3>Video Production</h3>
+      <p>Talking-head videos · Green-screen videos</p>
+    </article>
+    <article class="card tint-blue">
+      <span class="num">02.</span><span class="emo">✏️</span>
+      <h3>Creative Concepts &amp; Scriptwriting</h3>
+      <p>Audience-led video concepts · Hook and angle development · Conversational brand scripts · Story-led product messaging</p>
+    </article>
+    <article class="card tint-mint">
+      <span class="num">03.</span><span class="emo">🖼️</span>
+      <h3>Carousel Content Design</h3>
+      <p>Carousel concept development · Slide-by-slide storytelling · Brand-aligned visual direction · Copy-led layouts</p>
+    </article>
+  </div>
+  <p class="hand center">Your brief. My creative brain.</p>
+</section>
+
+<!-- 4 · UGC EXAMPLES -->
+<section class="screen ugc" id="ugc">
+  <div class="head">
+    <h2>UGC <span class="ul">Examples.</span></h2>
+    <p class="lede">A little look at what I create.</p>
+  </div>
+
+  <h3 class="sub">01. Video Content</h3>
+  <!-- Replace each .thumb with a real video still / <video> and update the caption -->
+  <div class="thumbs">
+    <a class="thumb t-pink" href="#"><span class="play">▶</span><em>Add video still</em><small>Brand / Product</small></a>
+    <a class="thumb t-blue" href="#"><span class="play">▶</span><em>Add video still</em><small>Brand / Product</small></a>
+    <a class="thumb t-mint" href="#"><span class="play">▶</span><em>Add video still</em><small>Brand / Product</small></a>
+  </div>
+
+  <h3 class="sub">02. Carousel Content</h3>
+  <!-- Replace with real carousel designs -->
+  <div class="thumbs carousels">
+    <div class="slide t-butter"><strong>Better Ideas.<br>Bigger Plans.</strong></div>
+    <div class="slide t-pink"><strong>Work Smarter<br>Not Harder</strong></div>
+    <div class="slide t-lav"><strong>Small Changes,<br>Big Impact</strong></div>
+  </div>
+  <p class="note">Featuring Anisha: Concept · Script · On-camera · Filming · Editing</p>
+</section>
+
+<!-- 5 · OFF THE CLOCK -->
+<section class="screen off" id="off-the-clock">
+  <div class="head">
+    <h2>Off the <span class="ul">Clock.</span></h2>
+    <p class="lede">Because there's more to me than a good edit.</p>
+  </div>
+  <div class="two">
+    <article class="side">
+      <div class="polaroid p-blue"><span>🎞️</span></div>
+      <div>
+        <h3><span class="n">01.</span> Movie Corner 🎞️</h3>
+        <p>Always looking for the next film worth talking about.</p>
+        <a class="pill pill-glass c-blue" href="#" data-todo="movie-corner-link">Explore my movie picks ↗</a>
+      </div>
+    </article>
+    <article class="side">
+      <div class="polaroid p-mint"><span>▶</span></div>
+      <div>
+        <h3><span class="n">02.</span> YouTube ▶</h3>
+        <p>A camera, a few thoughts and whatever I feel like sharing.</p>
+        <a class="pill pill-glass c-mint" href="#" data-todo="youtube-link">Watch my videos ↗</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 6 · CONTACT -->
+<section class="screen contact" id="contact">
+  <div class="copy">
+    <h2>Have a project in mind?</h2>
+    <p class="big">Let's make something<br><span class="hl">worth watching.</span></p>
+    <p class="tags">UGC Video Producer · India · Remote projects</p>
+    <a class="pill pill-pink big-btn" id="emailBtn" href="mailto:framesbyan@gmail.com">✉ Email me</a>
+    <p class="email-line"><a id="emailText" href="mailto:framesbyan@gmail.com">framesbyan@gmail.com</a></p>
+  </div>
+  <div class="card-stack" aria-hidden="true">
+    <div class="note-card">Create.<br>Share.<br>Repeat. ♡</div>
+  </div>
+  <p class="foot">No complicated forms. Just say hello. ☺</p>
+</section>
+
+</main>
+<script src="script.js?v=20261112p"></script>
+</body>
+</html>

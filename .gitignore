@@ -1,0 +1,11 @@
+# Only the website itself is published; working files (source videos, PDF, stills) stay local.
+/*
+!/.gitignore
+!/.nojekyll
+!/index.html
+!/styles.css
+!/script.js
+!/assets/
+/assets/*
+!/assets/about.jpg
+!/assets/hero-looks.mp4
