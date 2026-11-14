@@ -201,7 +201,7 @@ h3{font-size:1.3rem;font-weight:600}
 .hero .chip{padding:13px 20px;font-size:1rem;z-index:2;white-space:nowrap}
 .hero .chip b{margin:0;opacity:.6}
 .eyebrow{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.14em;color:var(--accent);padding:6px 14px;border-radius:999px;margin-bottom:18px}
-.hero h1{font-size:clamp(2.2rem,4vw,3.4rem)}
+.hero h1{font-size:clamp(2.2rem,4vw,3.4rem);max-width:900px;margin:0 auto}
 .hero .lede{font-size:1.05rem;max-width:380px}
 .big-btn{margin-top:26px;font-size:1.02rem;padding:14px 28px}
 .link{display:block;margin-top:16px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);transition:color .2s}
