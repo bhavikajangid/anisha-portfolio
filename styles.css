@@ -51,7 +51,7 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:80px}
+html{scroll-behavior:smooth;scroll-padding-top:0;--nav-clear:92px}
 body{font-family:var(--body);color:var(--ink);background:var(--bg);line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background-color .5s,color .5s}
 a{color:inherit;text-decoration:none}
 ul{list-style:none}
@@ -128,7 +128,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* =========================================================
    Shared layout & type
    ========================================================= */
-.screen{position:relative;min-height:100vh;padding:130px 6vw 90px;display:flex;align-items:center;justify-content:center;gap:5vw;max-width:1280px;margin:0 auto}
+/* every section is one screen: its content starts just under the fixed nav and is centred in what's left */
+.screen{position:relative;min-height:100vh;min-height:100svh;padding:var(--nav-clear) 6vw clamp(20px,3vh,56px);display:flex;align-items:center;justify-content:center;gap:5vw;max-width:1280px;margin:0 auto}
 h1,h2,h3{font-family:var(--head);line-height:1.08;letter-spacing:-.02em}
 h1{font-size:clamp(2.6rem,5.6vw,4.6rem);font-weight:800}
 h2{font-size:clamp(2.3rem,4.6vw,3.8rem);font-weight:800}
@@ -140,9 +141,16 @@ h3{font-size:1.3rem;font-weight:600}
 .ul{position:relative;white-space:nowrap}
 .ul::after{content:"";position:absolute;left:0;right:0;bottom:-.1em;height:.28em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M2 7 Q 15 1 30 7 T 60 7 T 90 7 T 118 6' fill='none' stroke='%237fbcf5' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat}
 .hand{font-family:var(--hand);font-size:1.55rem;color:var(--accent);display:inline-block;margin-top:26px;font-weight:700}
-.hand.center{display:block;text-align:center}
+.hand.center{display:block;text-align:center;margin-top:0}
 .head{text-align:center}
-.screen.what,.screen.ugc,.screen.off{flex-direction:column;align-items:stretch;justify-content:center;gap:34px}
+.screen.what,.screen.ugc,.screen.off{flex-direction:column;align-items:stretch;justify-content:center;gap:clamp(16px,3.4vh,34px)}
+.screen .head .lede{margin-top:clamp(6px,1.4vh,14px)}
+.screen.what h2,.screen.ugc h2,.screen.off h2,.about h2{font-size:clamp(2.1rem,min(4.6vw,7.4vh),3.8rem)}
+/* desktop: scrolling settles on the nearest section */
+@media (min-width:861px) and (min-height:600px){
+  html{scroll-snap-type:y proximity}
+  .screen{scroll-snap-align:start}
+}
 
 /* =========================================================
    Buttons, chips
@@ -161,7 +169,7 @@ h3{font-size:1.3rem;font-weight:600}
    ========================================================= */
 .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,360px) minmax(0,1fr);
   grid-template-rows:auto 1fr 1fr 1fr;grid-template-areas:"head head head" "tl stage tr" "ml stage mr" "bl stage br";
-  align-items:center;column-gap:3vw;row-gap:14px;padding-top:120px;padding-bottom:0}
+  align-items:center;column-gap:3vw;row-gap:14px;padding-top:calc(var(--nav-clear) + 8px);padding-bottom:0}
 .head-block{grid-area:head;text-align:center;justify-self:center;max-width:760px;z-index:2;margin-bottom:6px}
 .head-block .lede{margin-left:auto;margin-right:auto;max-width:520px}
 .tl{grid-area:tl;align-self:end}.ml{grid-area:ml}.bl{grid-area:bl;align-self:start}
@@ -206,7 +214,7 @@ h3{font-size:1.3rem;font-weight:600}
 .big-btn{margin-top:26px;font-size:1.02rem;padding:14px 28px}
 .link{display:block;margin-top:16px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);transition:color .2s}
 .link:hover{color:var(--accent)}
-.stage{grid-area:stage;position:relative;width:100%;aspect-ratio:420/540;z-index:1;align-self:end}
+.stage{grid-area:stage;position:relative;width:min(100%,calc((100svh - 350px) * .778));justify-self:center;aspect-ratio:420/540;z-index:1;align-self:end}
 .stage video{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
 .stage::before{content:"";position:absolute;inset:4% -14% 0;background:radial-gradient(closest-side,var(--glow),transparent 72%);opacity:.75;z-index:-1;filter:blur(10px);transition:background .5s}
 .stage canvas{width:100%;height:100%;display:block;-webkit-mask-image:linear-gradient(#000 80%,transparent 99%);mask-image:linear-gradient(#000 80%,transparent 99%);filter:drop-shadow(0 22px 30px rgba(60,60,120,.18))}
@@ -234,10 +242,10 @@ h3{font-size:1.3rem;font-weight:600}
    What I do
    ========================================================= */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.card{position:relative;padding:30px 26px 32px;border-radius:var(--r);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.card{position:relative;padding:clamp(22px,3.6vh,30px) 26px clamp(22px,3.6vh,32px);border-radius:var(--r);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
 .card:hover{transform:translateY(-6px)}
 .card .num{font-family:var(--head);font-weight:800;font-size:1.3rem;opacity:.5}
-.card-photo{position:relative;margin:-14px -12px 18px;aspect-ratio:4/3;border-radius:20px;overflow:hidden;box-shadow:0 10px 24px rgba(60,60,120,.14)}
+.card-photo{position:relative;margin:-14px -12px 18px;aspect-ratio:4/3;max-height:25vh;border-radius:20px;overflow:hidden;box-shadow:0 10px 24px rgba(60,60,120,.14)}
 .card-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
 .card:hover .card-photo img{transform:scale(1.04)}
 .card .emo{position:absolute;right:12px;bottom:12px;width:46px;height:46px;display:grid;place-items:center;font-size:1.4rem;border-radius:14px;
@@ -249,7 +257,7 @@ h3{font-size:1.3rem;font-weight:600}
 /* =========================================================
    UGC
    ========================================================= */
-.sub{font-size:1.05rem;margin-bottom:-14px}
+.sub{font-size:1.05rem;margin-bottom:calc(clamp(16px,3.4vh,34px) * -.45)}
 .thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .thumb{position:relative;aspect-ratio:16/10;border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;overflow:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
 .thumb:hover{transform:translateY(-5px)}
@@ -263,16 +271,16 @@ h3{font-size:1.3rem;font-weight:600}
    Off the clock
    ========================================================= */
 .two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.side{display:flex;align-items:center;gap:26px;padding:26px 28px;border-radius:var(--r)}
+.side{display:flex;align-items:center;gap:26px;padding:clamp(16px,3vh,26px) 28px;border-radius:var(--r)}
 .side h3{margin-bottom:8px}.side .n{color:var(--accent)}
 .side p{color:var(--ink-soft);margin-bottom:16px;max-width:300px}
-.polaroid{flex:none;width:136px;height:156px;padding:10px 10px 32px;border-radius:14px;--glass:var(--glass-strong)}
+.polaroid{flex:none;width:clamp(100px,17vh,136px);height:clamp(115px,19.5vh,156px);padding:10px 10px 32px;border-radius:14px;--glass:var(--glass-strong)}
 .polaroid span{display:grid;place-items:center;width:100%;height:100%;border-radius:8px;font-size:2.4rem}
 .p-blue{transform:rotate(-5deg)}.p-blue span{background:rgba(var(--blue),.55)}
 .posts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .post{display:block;padding:12px 12px 18px;border-radius:24px;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
 .post:hover{transform:translateY(-5px)}
-.post figure{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;margin-bottom:14px}
+.post figure{position:relative;aspect-ratio:16/9;max-height:25vh;width:100%;border-radius:16px;overflow:hidden;margin-bottom:14px}
 .post img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
 .post:hover img{transform:scale(1.04)}
 .post .tag{position:absolute;left:10px;top:10px;padding:5px 11px;border-radius:999px;font-size:.74rem;font-weight:600;color:#fff;
@@ -316,7 +324,7 @@ h3{font-size:1.3rem;font-weight:600}
 }
 @media (max-width:860px){
   .nav nav a:not(.pill){display:none}
-  .screen{flex-direction:column;padding:110px 6vw 80px;min-height:auto}
+  .screen{flex-direction:column;padding:96px 6vw 64px;min-height:auto}
   .about .copy,.contact .copy{max-width:none}
   .about{flex-direction:column-reverse}
   .cards,.thumbs,.two,.posts{grid-template-columns:1fr}
