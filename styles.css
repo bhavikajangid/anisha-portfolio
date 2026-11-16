@@ -262,6 +262,17 @@ h3{font-size:1.3rem;font-weight:600}
 .thumb{position:relative;aspect-ratio:16/10;border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;overflow:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
 .thumb:hover{transform:translateY(-5px)}
 .thumb em{font-style:normal;font-weight:600}.thumb small{color:var(--ink-soft)}
+/* vertical video cards: 9:16 thumbnail, play button, caption on a soft fade */
+.thumbs.vids{grid-template-columns:repeat(4,1fr);gap:18px;width:100%;max-width:calc((100svh - 300px) * .5625 * 4 + 54px);margin:0 auto}
+.thumb.vid{aspect-ratio:9/16;padding:8px;justify-content:flex-end;gap:0}
+.thumb.vid img{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);object-fit:cover;border-radius:18px;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.thumb.vid:hover img{transform:scale(1.03)}
+.thumb.vid .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0;z-index:1;transition:transform .3s}
+.thumb.vid:hover .play{transform:translate(-50%,-50%) scale(1.1)}
+.thumb.vid .cap{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;padding:40px 14px 12px;margin:0;border-radius:0 0 18px 18px;color:#fff;
+  background:linear-gradient(transparent,rgba(20,19,34,.72))}
+.thumb.vid .cap em{font-family:var(--head);font-size:1.1rem}
+.thumb.vid .cap small{color:rgba(255,255,255,.85);font-size:.8rem}
 .play{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:var(--accent);font-size:1.05rem;padding-left:3px;--glass:var(--glass-strong);margin-bottom:6px}
 .slide{aspect-ratio:16/9;border-radius:24px;display:grid;place-items:center;text-align:center;font-family:var(--head);font-size:clamp(1.15rem,2.1vw,1.7rem);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
 .slide:hover{transform:translateY(-5px)}
@@ -328,6 +339,7 @@ h3{font-size:1.3rem;font-weight:600}
   .about .copy,.contact .copy{max-width:none}
   .about{flex-direction:column-reverse}
   .cards,.thumbs,.two,.posts{grid-template-columns:1fr}
+  .thumbs.vids{grid-template-columns:1fr 1fr;max-width:none}
   .side{padding:20px}
   .contact{padding-bottom:130px}
   .note-card{width:200px;height:240px;font-size:2rem}
