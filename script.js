@@ -161,7 +161,7 @@
 })();
 
 // Fade sections' content in on scroll
-const targets = document.querySelectorAll('.copy, .head, .card, .thumb, .slide, .side, .frame');
+const targets = document.querySelectorAll('.copy, .head, .card, .thumb, .slide, .side, .feed, .frame');
 targets.forEach(el => el.classList.add('reveal'));
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });

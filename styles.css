@@ -1,5 +1,5 @@
 /* =========================================================
-   Theme tokens — light is default, dark via [data-theme="dark"]
+   Theme tokens: light is default, dark via [data-theme="dark"]
    ========================================================= */
 :root{
   --bg:#f6f4fb;
@@ -141,9 +141,9 @@ h3{font-size:1.3rem;font-weight:600}
 .ul{position:relative;white-space:nowrap}
 .ul::after{content:"";position:absolute;left:0;right:0;bottom:-.1em;height:.28em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M2 7 Q 15 1 30 7 T 60 7 T 90 7 T 118 6' fill='none' stroke='%237fbcf5' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat}
 .hand{font-family:var(--hand);font-size:1.55rem;color:var(--accent);display:inline-block;margin-top:26px;font-weight:700}
-.hand.center{display:block;text-align:center;margin-top:0}
+.hand.center{display:block;text-align:center;margin-top:4px}
 .head{text-align:center}
-.screen.what,.screen.ugc,.screen.off{flex-direction:column;align-items:stretch;justify-content:center;gap:clamp(16px,3.4vh,34px)}
+.screen.what,.screen.ugc,.screen.off{flex-direction:column;align-items:stretch;justify-content:center;gap:clamp(20px,4vh,40px)}
 .screen .head .lede{margin-top:clamp(6px,1.4vh,14px)}
 .screen.what h2,.screen.ugc h2,.screen.off h2,.about h2{font-size:clamp(2.1rem,min(4.6vw,7.4vh),3.8rem)}
 /* desktop: scrolling settles on the nearest section */
@@ -206,6 +206,18 @@ h3{font-size:1.3rem;font-weight:600}
 .status .wave{filter:drop-shadow(0 6px 6px rgba(0,0,0,.18));transform-style:preserve-3d;animation:wave 2.4s ease-in-out infinite;transform-origin:70% 85%}
 @keyframes wave{0%,60%,100%{transform:rotateY(-12deg) rotate(0)}10%{transform:rotateY(-12deg) rotate(16deg)}20%{transform:rotateY(-12deg) rotate(-8deg)}30%{transform:rotateY(-12deg) rotate(14deg)}40%{transform:rotateY(-12deg) rotate(-4deg)}50%{transform:rotateY(-12deg) rotate(10deg)}}
 @media (prefers-reduced-motion:reduce){.status .wave,.dot{animation:none}}
+/* hovering "Proof of work": the brand logos pop out from under the chip, fanning to straight up (0°), 45° and left (90°) */
+.brand-pop{position:absolute;left:30px;top:50%;width:0;height:0;z-index:-1;pointer-events:none}
+.brand-pop img{position:absolute;left:-23px;top:-23px;width:46px;height:46px;padding:5px;border-radius:15px;opacity:0;
+  background:linear-gradient(160deg,#fff,rgba(255,255,255,.7));border:1px solid rgba(255,255,255,.9);
+  box-shadow:inset 0 2px 1px #fff,inset 0 -3px 6px rgba(80,60,140,.14),0 3px 0 rgba(120,100,180,.2),0 12px 20px -6px rgba(60,40,110,.35);
+  transform:translate(0,0) scale(.3) rotate(0);transition:transform .5s cubic-bezier(.3,1.5,.5,1),opacity .25s}
+[data-theme="dark"] .brand-pop img{background:linear-gradient(160deg,rgba(255,255,255,.28),rgba(255,255,255,.1));border-color:rgba(255,255,255,.2)}
+.hero .ml:hover .brand-pop img,.hero .ml:focus-visible .brand-pop img{opacity:1}
+.hero .ml:hover .brand-pop img:nth-child(1),.hero .ml:focus-visible .brand-pop img:nth-child(1){transform:translate(0,-80px) scale(1) rotate(-6deg)}
+.hero .ml:hover .brand-pop img:nth-child(2),.hero .ml:focus-visible .brand-pop img:nth-child(2){transform:translate(-57px,-57px) scale(1) rotate(5deg);transition-delay:.06s}
+.hero .ml:hover .brand-pop img:nth-child(3),.hero .ml:focus-visible .brand-pop img:nth-child(3){transform:translate(-80px,0) scale(1) rotate(-4deg);transition-delay:.12s}
+@media (max-width:1060px){.brand-pop{display:none}}
 .hero .chip{padding:13px 20px;font-size:1rem;z-index:2;white-space:nowrap}
 .hero .chip b{margin:0;opacity:.6}
 .eyebrow{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.14em;color:var(--accent);padding:6px 14px;border-radius:999px;margin-bottom:18px}
@@ -241,18 +253,22 @@ h3{font-size:1.3rem;font-weight:600}
 /* =========================================================
    What I do
    ========================================================= */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+/* card width follows screen height so the phone-shaped (4:5) photos fit with the text on one screen */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;width:100%;max-width:var(--cards-w,min(1000px,calc((100svh - 330px) * 1.95)));margin:0 auto}
 .card{position:relative;padding:clamp(22px,3.6vh,30px) 26px clamp(22px,3.6vh,32px);border-radius:var(--r);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
 .card:hover{transform:translateY(-6px)}
 .card .num{font-family:var(--head);font-weight:800;font-size:1.3rem;opacity:.5}
-.card-photo{position:relative;margin:-14px -12px 18px;aspect-ratio:4/3;max-height:25vh;border-radius:20px;overflow:hidden;box-shadow:0 10px 24px rgba(60,60,120,.14)}
-.card-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.card-photo{position:relative;margin:-10px -10px 14px;aspect-ratio:4/5;isolation:isolate;border-radius:20px;overflow:hidden;box-shadow:0 10px 24px rgba(60,60,120,.14)}
+/* whole photo is shown (contain); a blurred copy of it fills the sides */
+.card-photo img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 50%);display:block;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
 .card:hover .card-photo img{transform:scale(1.04)}
 .card .emo{position:absolute;right:12px;bottom:12px;width:46px;height:46px;display:grid;place-items:center;font-size:1.4rem;border-radius:14px;
   background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.6)}
 [data-theme="dark"] .card .emo{background:rgba(20,19,34,.55);border-color:rgba(255,255,255,.12)}
-.card h3{margin:8px 0 10px}
-.card p{color:var(--ink-soft);font-size:.97rem}
+.card-photo h3{position:absolute;left:0;right:0;bottom:0;margin:0;padding:48px 16px 14px;color:#fff;font-size:1.2rem;line-height:1.15;
+  background:linear-gradient(transparent,rgba(20,19,34,.78));text-shadow:0 1px 3px rgba(0,0,0,.3)}
+.card-photo h3 ~ .emo,.card .emo{top:12px;bottom:auto}
+.card p{color:var(--ink-soft);font-size:.93rem;line-height:1.5}
 
 /* =========================================================
    UGC
@@ -263,16 +279,22 @@ h3{font-size:1.3rem;font-weight:600}
 .thumb:hover{transform:translateY(-5px)}
 .thumb em{font-style:normal;font-weight:600}.thumb small{color:var(--ink-soft)}
 /* vertical video cards: 9:16 thumbnail, play button, caption on a soft fade */
-.thumbs.vids{grid-template-columns:repeat(4,1fr);gap:18px;width:100%;max-width:calc((100svh - 300px) * .5625 * 4 + 54px);margin:0 auto}
+/* UGC: wider than other sections so the four videos can be big */
+.screen.ugc{max-width:1440px;padding-left:4vw;padding-right:4vw}
+.thumbs.vids{grid-template-columns:repeat(4,1fr);gap:22px;width:100%;max-width:1320px;margin:0 auto}
+.vid-item{display:flex;flex-direction:column;gap:10px;min-width:0}
+.vid-item figcaption{text-align:center;font-family:var(--head);font-weight:600;font-size:1.02rem}
+.vid-item figcaption i{font-style:normal;font-family:var(--body);font-weight:400;font-size:.88rem;color:var(--ink-soft)}
 .thumb.vid{aspect-ratio:9/16;padding:8px;justify-content:flex-end;gap:0}
-.thumb.vid img{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);object-fit:cover;border-radius:18px;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
-.thumb.vid:hover img{transform:scale(1.03)}
+.thumb.vid > img{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);object-fit:cover;border-radius:18px;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.thumb.vid:hover > img{transform:scale(1.03)}
 .thumb.vid .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0;z-index:1;transition:transform .3s}
 .thumb.vid:hover .play{transform:translate(-50%,-50%) scale(1.1)}
-.thumb.vid .cap{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;padding:40px 14px 12px;margin:0;border-radius:0 0 18px 18px;color:#fff;
+.thumb.vid .cap{position:relative;z-index:1;display:flex;flex-direction:row;align-items:center;gap:8px;padding:40px 14px 12px;margin:0;border-radius:0 0 18px 18px;color:#fff;
   background:linear-gradient(transparent,rgba(20,19,34,.72))}
 .thumb.vid .cap em{font-family:var(--head);font-size:1.1rem}
-.thumb.vid .cap small{color:rgba(255,255,255,.85);font-size:.8rem}
+.thumb.vid .cap small{color:rgba(255,255,255,.85);font-size:.8rem;margin-left:auto}
+.cap-logo{width:22px;height:22px;border-radius:6px;flex:none}
 .play{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:var(--accent);font-size:1.05rem;padding-left:3px;--glass:var(--glass-strong);margin-bottom:6px}
 .slide{aspect-ratio:16/9;border-radius:24px;display:grid;place-items:center;text-align:center;font-family:var(--head);font-size:clamp(1.15rem,2.1vw,1.7rem);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
 .slide:hover{transform:translateY(-5px)}
@@ -301,6 +323,64 @@ h3{font-size:1.3rem;font-weight:600}
 .p-mint{transform:rotate(4deg)}.p-mint span{background:rgba(var(--mint),.55);color:var(--accent)}
 
 /* =========================================================
+   Off the clock: Instagram Reels on a phone (left), YouTube home page (right)
+   ========================================================= */
+.feeds{--mock-h:clamp(340px,calc(100svh - 412px),520px);display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:start;width:100%}
+.feed{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0}
+.feed h3{margin:0}
+.feed > p{color:var(--ink-soft);margin:-4px 0 6px;max-width:34ch}
+.feed .pill{margin-top:8px;white-space:nowrap}
+.ig-feed{width:calc(var(--mock-h) * .5 + 16px)}
+/* phone */
+.phone{position:relative;display:block;width:calc(var(--mock-h) * .5);height:var(--mock-h);border-radius:34px;overflow:hidden;color:#fff;
+  border:7px solid #15141c;background:#000;box-shadow:0 0 0 1.5px rgba(255,255,255,.25),0 24px 50px -10px rgba(40,30,80,.45);transform:rotate(-2deg);
+  transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.phone:hover{transform:rotate(0) translateY(-6px)}
+.phone .notch{position:absolute;left:50%;top:8px;transform:translateX(-50%);width:34%;height:16px;border-radius:12px;background:#000;z-index:3}
+.phone .reel{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.phone::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.35),transparent 18%,transparent 58%,rgba(0,0,0,.7));pointer-events:none}
+.reel-top,.reel-side,.reel-bottom{position:absolute;z-index:2}
+.reel-top{left:16px;right:14px;top:30px;display:flex;justify-content:space-between;align-items:center;font-size:1.05rem}
+.reel-top svg{width:22px;height:22px}
+.reel-side{right:10px;bottom:84px;display:flex;flex-direction:column;gap:16px}
+.reel-side i svg{width:24px;height:24px;display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
+.reel-bottom{left:12px;right:46px;bottom:14px;display:flex;flex-direction:column;gap:6px;font-size:.82rem}
+.reel-bottom .who{display:flex;align-items:center;gap:8px}
+.reel-bottom .who img{width:26px;height:26px;border-radius:50%;object-fit:cover;border:1.5px solid #fff}
+.reel-bottom em{font-style:normal;font-size:.72rem;padding:2px 8px;border:1px solid rgba(255,255,255,.8);border-radius:7px}
+/* YouTube window */
+.yt-feed{width:100%}
+.yt-feed > p{max-width:none}
+.yt-window{width:100%;height:var(--mock-h);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;
+  background:#fff;color:#0f0f0f;border:1px solid rgba(0,0,0,.06);box-shadow:0 24px 50px -14px rgba(40,30,80,.35)}
+[data-theme="dark"] .yt-window{background:#0f0f0f;color:#f1f1f1;border-color:rgba(255,255,255,.08)}
+.yt-bar{display:flex;align-items:center;gap:16px;padding:12px 18px}
+.yt-logo{display:flex;align-items:center;gap:5px;font-family:"Arial Narrow",Arial,sans-serif;font-weight:700;letter-spacing:-.04em;font-size:1.15rem}
+.yt-logo svg{width:28px;height:20px}
+.yt-search{flex:1;max-width:420px;margin:0 auto;padding:7px 16px;border-radius:999px;border:1px solid rgba(128,128,128,.35);font-size:.85rem;color:#909090}
+.yt-me{width:28px;height:28px;border-radius:50%;object-fit:cover}
+.yt-chips{display:flex;gap:8px;padding:2px 18px 12px;font-size:.8rem;white-space:nowrap;overflow:hidden}
+.yt-chips b,.yt-chips span{padding:5px 12px;border-radius:8px;font-weight:500;background:rgba(128,128,128,.14)}
+.yt-chips b{background:#0f0f0f;color:#fff}
+[data-theme="dark"] .yt-chips b{background:#f1f1f1;color:#0f0f0f}
+.yt-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:4px 18px 18px;min-height:0}
+.yt-vid{display:flex;flex-direction:column;gap:10px;min-width:0}
+.yt-thumb{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:12px;display:block;transition:border-radius .3s,transform .4s}
+.yt-vid:hover .yt-thumb{border-radius:4px;transform:scale(1.02)}
+.yt-meta{display:flex;gap:10px;align-items:flex-start}
+.yt-meta img{width:32px;height:32px;border-radius:50%;object-fit:cover;flex:none}
+.yt-meta b{display:block;font-size:.92rem;font-weight:600;line-height:1.3}
+.yt-meta small{display:block;margin-top:3px;font-size:.78rem;color:#606060}
+[data-theme="dark"] .yt-meta small{color:#aaa}
+@media (max-width:860px){
+  .feeds{grid-template-columns:1fr;--mock-h:480px}
+  .ig-feed{width:auto;align-items:center}
+  .yt-window{height:auto}
+  .yt-grid{grid-template-columns:1fr}
+  .yt-search{display:none}
+}
+
+/* =========================================================
    Contact
    ========================================================= */
 .contact .copy{max-width:560px;z-index:1}
@@ -311,6 +391,14 @@ h3{font-size:1.3rem;font-weight:600}
 .card-stack::before{content:"";position:absolute;inset:0;border-radius:24px;transform:rotate(-7deg) translate(-18px,10px);background:rgba(var(--blue),calc(var(--tint-a) + .1));border:1px solid var(--glass-line);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
 .note-card{position:relative;width:250px;height:310px;border-radius:24px;display:grid;place-items:center;text-align:center;font-family:var(--hand);font-size:2.5rem;font-weight:700;color:var(--accent);transform:rotate(5deg);--tint:var(--pink);--tint-a:.45}
 [data-theme="dark"] .note-card{--tint-a:.16}
+.card-stack:has(.photo)::before{display:none}
+.note-card.photo{width:auto;height:auto;padding:0;display:block;background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;
+  transform:rotate(5deg);animation:floaty 6s ease-in-out infinite;transition:filter .4s}
+.note-card.photo img{transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.note-card.photo:hover img{transform:rotate(-5deg) scale(1.04)}
+.note-card.photo{filter:drop-shadow(0 18px 28px rgba(60,40,90,.25))}
+@keyframes floaty{0%,100%{transform:rotate(5deg) translateY(0)}50%{transform:rotate(3deg) translateY(-10px)}}
+.note-card.photo img{display:block;width:clamp(220px,min(26vw,42vh),320px);height:auto;border-radius:0}
 .foot{position:absolute;bottom:34px;left:0;right:0;text-align:center;font-family:var(--hand);font-size:1.5rem;color:var(--ink-soft)}
 
 /* =========================================================
@@ -343,6 +431,8 @@ h3{font-size:1.3rem;font-weight:600}
   .side{padding:20px}
   .contact{padding-bottom:130px}
   .note-card{width:200px;height:240px;font-size:2rem}
+  .note-card.photo{width:auto;height:auto}
+  .note-card.photo img{width:220px}
   .bg i{filter:blur(50px)}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}.reveal{opacity:1;transform:none}}
